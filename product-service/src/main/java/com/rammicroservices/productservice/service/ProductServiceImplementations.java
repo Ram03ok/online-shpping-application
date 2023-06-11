@@ -2,18 +2,19 @@ package com.rammicroservices.productservice.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rammicroservices.productservice.dto.ProductResponse;
 import com.rammicroservices.productservice.models.Product;
 import com.rammicroservices.productservice.repository.ProductRepository;
 
-import lombok.Builder;
 
 @Service
-@Builder
 public class ProductServiceImplementations implements ProductService{
+	
+	private static Logger logger = LoggerFactory.getLogger(ProductServiceImplementations.class);
 	
 	@Autowired
 	private ProductRepository productRepository;
@@ -22,15 +23,15 @@ public class ProductServiceImplementations implements ProductService{
 	}
 	@Override
 	public List<Product> getAllproducts() {
-		return productRepository.findAll();
+		logger.info("inside ProductServiceImplementations, getAllproducts method");
+		List<Product> products =  productRepository.findAll();
+		return products.stream().toList();
 	}
 	@Override
-	public void saveProduct(ProductResponse productResponse) {
-		Product product = Product.builder()
-				.name(productResponse.getName())
-				.description(productResponse.getDescription())
-				.price(productResponse.getPrice())
-				.build();
+	public void saveProduct(Product product) {
+		logger.info("inside ProductServiceImplementations, saveProduct method");
+		productRepository.save(product);
+		logger.info("product {} is saved", product.getId());
 	}
 
 }
