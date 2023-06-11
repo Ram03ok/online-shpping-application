@@ -1,38 +1,20 @@
-package com.rammicroservices.productservice.models;
+package com.rammicroservices.productservice.dto;
 
 import java.math.BigDecimal;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+public class ProductResponse {
 
-import lombok.Builder;
-
-@Document(value="product")
-@Builder
-public class Product {
-	
-	@Id
-	private String id;
 	private String name;
 	private String description;
 	private BigDecimal price;
 	
-	public Product() {}
+	public ProductResponse() {}
 
-	public Product(String id, String name, String description, BigDecimal price) {
-		super();
-		this.id = id;
+	public ProductResponse(String name, String description, BigDecimal price) {
+
 		this.name = name;
 		this.description = description;
 		this.price = price;
-	}
-	
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getName() {
@@ -58,6 +40,5 @@ public class Product {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
-
 
 }
