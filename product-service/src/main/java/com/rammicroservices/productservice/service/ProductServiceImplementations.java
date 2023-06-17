@@ -1,19 +1,27 @@
 package com.rammicroservices.productservice.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.rammicroservices.productservice.models.Product;
 import com.rammicroservices.productservice.repository.ProductRepository;
 
 
 @Service
-public class ProductServiceImplementations implements ProductService{
+@Transactional
+public class ProductServiceImplementations implements ProductService, Serializable {
 	
+	/**
+	 * created by Ram Randhi
+	 */
+	private static final long serialVersionUID = -1234713212163785003L;
+
 	private static Logger logger = LoggerFactory.getLogger(ProductServiceImplementations.class);
 	
 	@Autowired
